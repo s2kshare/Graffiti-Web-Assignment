@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <title>History | Graffiti</title>
+    <style>
+        body, html {
+            background-color: black;
+            background-image: url(img/backgroundImg.png);
+            overflow-x: hidden;
+        }
+        .container {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+        .timeline {
+            width: 80%;
+            height: auto;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .timeline ul {
+            list-style: none;
+        }
+        .timeline ul li {
+            padding: 20px;
+            background-color: #1e1f22;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .timeline ul li:last-child {
+            margin-bottom: 0;
+        }
+        .timelineContent h1 {
+            font-weight: 500;
+            font-size: 25px;
+            line-height: 30px;
+            margin-bottom: 10px;
+        }
+        .timelineContent p {
+            font-size: 16px;
+            line-height: 30px;
+            font-weight: 300;
+        }
+        .timelineContent .date {
+            font-size: 12px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        @media only screen and (min-width: 768px) {
+            .timeline:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 3px;
+                height: 0%;
+                background-color: gray;
+                animation: stretch 3s ease forwards;
+                animation-delay: 1200ms;
+            }
+            @keyframes stretch {
+                from {height: 0;}
+                to {height: 100%;}
+            }            
+            .timeline ul li {
+                width: 50%;
+                position: relative;
+                margin-bottom: 50px;
+                transition: 0.5s ease all;
+            }
+            .timeline ul li:nth-child(odd) {
+                float: left;
+                clear: right;
+                transform: translateX(-30px);
+                border-radius: 20px 0px 20px 20px;
+            }
+            .timeline ul li:nth-child(even) {
+                float: right;
+                clear: left;
+                transform: translateX(30px);
+                border-radius: 0px 20px 20px 20px;
+            }
+            .timeline ul li::before {
+                content: "";
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background-color: gray;
+                top: -0px;
+                transition: 0.5s ease all;
+            }
+            .timeline ul li:nth-child(4)::before {
+                display: none;
+            }
+            .timeline ul li:nth-child(5) {
+                display: none;
+            }
+            .timeline ul li:nth-child(odd)::before {
+                transform: translate(50%, -50%);
+                right: -30px;
+            }
+            .timeline ul li:nth-child(4) {
+                border-radius: 20px 20px 20px 20px;
+                transform: translate(0%, 0%);
+                width: 105%;
+            }
+            .timeline ul li:nth-child(even)::before {
+                transform: translate(-50%, -50%);
+                left: -30px;
+            }
+            .timelineContent .date {
+                position: absolute;
+                top: -30px;
+            }
+            .timeline ul li:hover::before {
+                background-color: white;
+                filter: blur(0.1rem);
+            }
+            .timeline ul li:hover {
+                background-color: hsl(225, 6%, 20%);
+                scale: 1.01;
+            }
+            #spacer {
+                display: none;
+            }
+            .drop {
+            transform: translateX(-1000px);
+            animation: dropIn 1s ease forwards;
+            animation-delay: calc(var(--order) * 200ms);
+            opacity: 0;
+            }
+            .finalDot {
+                background-color: transparent;
+            }
+        }
+        .drop2 {
+            transform: translateX(1000px);
+            animation: dropInTwo 1s ease forwards;
+            animation-delay: calc(var(--order) * 200ms);
+            opacity: 0;
+        }
+        .drop3 {
+            transform: translateY(1000px);
+            animation: dropInThree 1s ease forwards;
+            animation-delay: calc(var(--order) * 200ms);
+            opacity: 0;
+        }
+        @keyframes dropInThree {
+            from {transform: translateY(1000px);}
+            to {transform: translateY(1%); opacity: 100%;}
+        }
+        @keyframes dropInTwo {
+            from {transform: translateX(1000px);}
+            to {transform: translateX(1%); opacity: 100%;}
+        }
+        @keyframes dropIn {
+            from {transform: translateX(-1000px);}
+            to {transform: translateX(1%); opacity: 100%;}
+        }
+        .timelineContent:nth-child(5) {
+            display: none;
+        }
+        .finalDot{
+            width: 20px;
+            height: 20px;
+            background-color: gray;
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0px;
+            opacity: 0;
+            border-radius: 50%;
+            transition: 0.5s ease all;
+            animation: fadeInside 1s ease forwards;
+            animation-delay: 2000ms;
+        }
+        @keyframes fadeInside {
+            from {opacity: 0%;}
+            to {opacity: 100%;}
+        }
+        .timeline h1 {
+            font-weight: 800;
+            text-align: center;
+        }
+        .finalDot:hover { background-color: white; filter: blur(0.1rem);}
+        .title {text-align: center;}
+        .title h1 {
+            font-weight: 900;
+            margin: 5px;
+        }
+        .title p {
+            line-height: 30px;
+        }
+        h1 {
+            pointer-events: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .drop {
+            transform: translateX(0px);
+            animation: dropIn 1s ease forwards;
+            animation-delay: calc(var(--order) * 200ms);
+            opacity: 0;
+        }
+        .drop2 {
+            transform: translateX(0px);
+            animation: dropInTwo 1s ease forwards;
+            animation-delay: calc(var(--order) * 200ms);
+            opacity: 0;
+        }
+        .drop3 {
+            transform: translateY(0px);
+            animation: dropInThree 1s ease forwards;
+            animation-delay: calc(var(--order) * 200ms);
+            opacity: 0;
+        }
+        @keyframes dropInThree {
+            from {transform: translateY(100px);}
+            to {opacity: 100%;}
+        }
+        @keyframes dropInTwo {
+            from {transform: translateX(-100px);}
+            to {opacity: 100%;}
+        }
+        @keyframes dropIn {
+            from {transform: translateX(100px);}
+            to {opacity: 100%;}
+        }
+    </style>
+    <script>
+        var ham = false;
+        var hamnum = document.getElementById('hammy');
+        function push() {
+            ham = !ham;
+            if (ham == true) hamnum.style.height = "150px";
+            else hamnum.style.height = "0px";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a class="logo">
+                <lottie-player src="/jsn_anims/logo.json"  background="transparent" speed="1" autoplay style="width: 50px; height: 50px" id="logoAnim" loop></lottie-player>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link" id="selected">History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="usage.html" class="nav-link">Usage</a>
+                </li>
+                <li class="nav-item">
+                    <a href="decorativeandhighart.html" class="nav-link">Decorative and high art</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="push();">
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+            </div>
+        </nav>
+    </header>
+    <div id="hammy"></div>
+    <div class="title">
+        <h1>History</h1>
+        <p>To explore the depths of Graffiti, we must explore its history.<br>Highlighting its origin, early 19th century presence, Darryl McCrays impact and its further evolution.</p>
+    </div>
+    <div class="container">
+        <div class="timeline">
+            <ul>
+                <li class="drop" style="--order: 1;">
+                    <div class="timelineContent">
+                        <h1>Origin</h1>
+                        <p>Graffiti (coined from the italian word graffio, meaning "scratch") has a long history. It's existance wasn't locked for one state, region or country.
+                            For example, markings have been found in ancient Roman ruins, in the remains of the Mayan city of Tikal in Central America, on rocks in Spain dating to the 16th century, and in medieval English churches. 
+                            Drawings on walls appeared in caves thousands of years ago, sooner being adopted by the Ancient Romans and Greeks who wrote their names and protest poems on buildings.</p>
+                    </div>
+                </li>
+                <li class="drop2" style="--order: 1;">
+                    <div class="timelineContent">
+                        <h1>Early 19th century presence</h1>
+                        <p>During the Great Depression within the 1930s, forms of name and symbol writing in chalk and coal were used on railroad cars by transients looking for work and people without housing to mark their presence and to communicate warnings and help.</p>
+                    </div>
+                </li>
+                <li class="drop" style="--order: 2;">
+                    <div class="timelineContent">
+                        <h1>Cont. Early 19th century presence</h1>
+                        <p>Progressing to the next decade, Edward H. Seymour added paint to existing spray can technology at his wife Bonnie's suggestion. Intially having the purpose of demonstrating an aluminium paint he had developed.  It quickly becomes the ideal medium for graffiti due to it's convienience, being small, portable, and fast to dry.</p>
+                        <br><p>In the years after World War II, there is a migration from the popular urban centers creating large areas of blight, especially in minority neighborhoods. In places like Philadelphia, Los Angeles, and New York this leads to a rise in gang violence in under-served communities. Gangs would often tag their names to communicate and mark territorial lines.</p>
+                    </div>
+                </li>
+                <li class="drop3" style="--order: 2;">
+                    <div class="timelineContent">
+                        <h1>Darryl McCrays Impact</h1>
+                        <p>Modern Graffiti (also known as "American Graffiti") began to appear in the early 1960s with Darryl McCray, a graffiti artist from Philadelphia known by his tag name, Cornbread.
+
+                            <br><br>Darryl inherited the nickname "Cornbread" in 1953 while being in the juvenile corrections facility. McCray complained to the cook of the institution only baking white bread while he preffered his grandmothers corn bread. Sooner being nicknamed "Cornbread" by the cooks.
+                            
+                            <br><br>In 1967, Darryl McCray began tagging city walls to get the attention of a girl who he developed a crush for. Writing "Cornbread Loves Cynthia" all over North Philadelphia. After winning over Cynthia, he continued tagging.
+                            
+                            <br><br>Soon in 1971, Cornelius Hosey was shot dead in gang warfare, and Philadelphia newspapers incorrectly identified him as Cornbread, the tagger. To prove the city cornbread was still alive, McCray started tagging everywhere within North Philidelphia. However, he was arrested for tagging "Cornbread Lives" on an elephant in the Philadelphia Zoo. This stunt had increased his notoriety.
+                            
+                            <br><br>Though the stunt landed him in jail, Cornbread claims, his reputation followed him. In Wall Writers: Graffiti in its Innocence, Roger Gastman’s seminal documentary on the pioneers of 1960’s graffiti, Cornbread relates how the jail’s guards would ask for his autograph, noting with pride: “My name rang like Jesus Christ.” ((</p>
+                    </div>
+                </li>
+                <li style="display: none;"><div class="timelineContent"></div></li>
+                <li class="drop2" style="--order: 3;">
+                    <div class="timelineContent">
+                        <h1>1970s - The further evolution of graffiti</h1>
+                        <p>Graffiti explodes in popularity, covering the buildings and subway cars of many major cities. Due to the negative reactions, in 1973, New York City spends 10 million dollars to erase graffiti throughout the city.</p>
+                    </div>
+                </li>
+                <li class="drop" style="--order: 3;">
+                    <div class="timelineContent">
+                        <h1>1980s - The further evolution of graffiti</h1>
+                        <p>Galleries begin to showcase work from graffiti artists such as Jean-Michel Basquiat and Lee Quinones.</p>
+                    </div>
+                </li>
+                <li class="drop2" style="--order: 4;">
+                    <div class="timelineContent">
+                        <h1>1990s - The further evolution of graffiti</h1>
+                        <p>street art is closely tied to hip hop culture. Graffiti artist, rapper, and filmmaker, Fab Five Freddy works closely with rappers and graffiti artists to combine cultures. He was interviewed about his passion for graffiti and music in The New Yorker in 1991.</p>
+                    </div>
+                </li>
+                <li class="drop" style="--order: 4;">
+                    <div class="timelineContent">
+                        <h1>2000s - The further evolution of graffiti</h1>
+                        <p>Graffiti artist Shepard Fairey creates a viral campaign poster for presidential candidate Barack Obama in 2008. It is acquired by the U.S National Portrait Gallery in 2009.</p>
+                    </div>
+                </li>
+                <li class="drop2" style="--order: 5;">
+                    <div class="timelineContent">
+                        <h1>2010s - The further evolution of graffiti</h1>
+                        <p>Artwork created at the start of the graffiti movement continues to be respected by the art world. A Jean Michel-Basquiat painting created in 1981 sells for $110 Million at auction, becoming the most expensive work by any U.S. artist, the most expensive work by a black artist, and the first $100 million USD artwork to have been created after 1980.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <div class="finalDot"></div>
+        </div>
+    </div>
+    <footer>
+        <div style="bottom: 0; left: 0; float: right; padding-bottom: 15px;">
+            <img src="img/sign.png" alt="signature" width="80" height="30" style="padding-top: 0px; float: right;">
+            <p>Devontae Chadwick</p>
+        </div>
+    </footer>
+    <script>
+        var ham = false;
+
+        var navArea = document.getElementById('hammy');
+
+        function push() {
+            ham = !ham;
+            if (ham) navArea.style.height = "300px";
+            else navArea.style.height = "0px";
+        }
+    </script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
+</body>
+</html>

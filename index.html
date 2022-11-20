@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <script src="main.js" defer></script>
+    <script src="js/landing.js" defer></script>
+    <title>Home | Graffiti</title>
+    <style>
+        html, body {
+            overflow: hidden;
+            animation: fadeIn 0.2s ease forwards;
+            animation-delay: 1s;
+        }
+        header {
+            mix-blend-mode: difference;
+        }
+        .sprayBG {
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+            transform: scale(1);
+        }
+        @media(max-width:1900px){
+            .sprayBG{
+                transform: scale(1.5);
+            }
+        }
+        @media(max-width:1400px){
+            .sprayBG{
+                transform: scale(2.5);
+            }
+        }
+        @media(max-width:900px){
+            .sprayBG{
+                transform: scale(4);
+            }
+            #overlay {
+                transform: scale(2);
+            }
+        }
+        @media(min-width: 1920px){
+            .sprayBG{
+                transform: scale(1);
+            }
+            #overlay {
+                transform: scale(1);
+            }
+        }
+        .landingFlex {
+            display: flex;
+            height: 75vh;
+        }
+        #bar {
+            mix-blend-mode: difference;
+            height: 2px;
+            width: 0%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: 0.5s ease all;
+            opacity: 0;
+        }
+        #L_Text_G {
+            mix-blend-mode: difference;
+            flex: 1;
+            pointer-events: none;
+        }
+        @keyframes fadeIn {
+            from {background-color: white;}
+            to {background-color: black;}
+        }
+
+        #overlay {
+            position: fixed;
+            z-index: 5;
+            opacity: 15%;
+        }
+        #creds {
+            mix-blend-mode: difference;
+        }
+        .intro {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <audio src="/audio/down+nitro.mp3" loop autoplay>Unsupported in Firefox</audio>
+
+    <!-- Fixed position of animated background -->
+
+    <div class="sprayBG">
+        <lottie-player src="/jsn_anims/sprayOverlay.json" background="transparent" speed="1" autoplay id="overlay" loop></lottie-player>
+        <lottie-player src="/jsn_anims/spray.json" background="transparent" speed="1" autoplay id="spray"></lottie-player>
+    </div>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <a class="logo">
+                <lottie-player src="/jsn_anims/logo.json"  background="transparent" speed="1" autoplay style="width: 50px; height: 50px" id="logoAnim" loop></lottie-player>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="" class="nav-link" id="selected">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="history.html" class="nav-link">History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="usage.html" class="nav-link">Usage</a>
+                </li>
+                <li class="nav-item">
+                    <a href="decorativeandhighart.html" class="nav-link">Decorative and high art</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="push();">
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+            </div>
+        </nav>
+    </header>
+    <div id="hammy"></div>
+    
+    <!-- Body -->
+    
+    <main>
+        <div class="landingFlex">
+            <div id="blank"></div>
+            <div id="L_G_text">
+                <lottie-player src="/jsn_anims/L_text.json"  background="transparent" speed="1" id="L_Text_G" autoplay></lottie-player>
+            </div>
+            <div id="blank"></div>
+        </div>
+    </main>
+
+    <hr id="bar">
+    <footer>
+        <div class="footerTags">
+            <div id="blank"></div>
+            <div id="creds">
+                <p>Devontae Chadwick</p>
+                <img src="img/sign.png" alt="signature" width="80" height="30" style="padding-top: 5px;">
+            </div>
+            <div id="blank"></div>
+        </div>
+    </footer>
+
+
+
+    <!-- CDN Links -->        
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
+
+    <script>
+        var ham = false;
+        var navArea = document.getElementById('hammy');
+
+        function push() {
+            ham = !ham;
+            if (ham){
+                navArea.style.height = "100px";
+            }
+            else {
+                navArea.style.height = "0px";
+            }
+        }
+    </script>
+
+</body>
+</html>

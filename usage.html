@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" type="text/css">    
+    <script src="main.js" defer></script>
+    <title>Usage | Graffiti</title>
+    <style>
+        html, body, header {
+            background-color: black;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            animation: overflowJump 0.5s ease forwards;
+            animation-delay: 1.5s;
+            background-image: url(img/backgroundImg.png);
+            background-blend-mode: difference;
+        }
+        @keyframes overflowJump {
+            from {overflow-y: hidden;}
+            to {overflow-y: visible;}
+        }
+        .title p {
+            font-size: 16px;
+            text-align: center;
+            line-height: 20px;
+            margin: 0 5%;
+        }
+        .card p {
+            margin: 0 5%;
+        }
+        .card {
+            width: 50%;
+            flex: 1;
+            height: 60vh;
+            border-radius: 25px;
+            justify-content: center;
+            display: flex;
+            position: relative;
+            background-color: black;
+            transition: 0.5s ease all;
+            opacity: 0;
+        }
+        .card:nth-child(odd){
+            animation: fadeIn 1s ease forwards;
+        }
+        .card:nth-child(even){
+            animation: fadeIn 1s ease forwards;
+        }
+        @keyframes fadeIn {
+            from {transform: translateX(-1000px);}
+            to {transform: translateX(0); opacity: 100%;}
+        }
+        .card h1 {
+            width: 100%;
+            margin-bottom: 15px;
+            margin-top: 5%;
+        }
+        .card p, .card h1 {
+            text-align: center;
+            line-height: 20px;
+        }
+        .container {
+            flex-direction: row;
+            display: flex;
+            margin: 1% 5% 1% 5%;
+            gap: 1.5%;
+        }
+        .textContent {
+            width: 80%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: 0.5s ease all;
+            padding: 0%;
+            opacity: 65%;
+            filter: blur(.2rem);
+        }
+        @media only screen and (max-width: 1000px) {
+            .container {
+                flex-direction: column;
+                gap: 2.5%;
+                height: 300vh;
+            }
+            .textContent {
+                width: 80%;
+                padding: 0%;
+            }
+            .card {
+                width: 100%;
+            }
+            .card:last-child{
+                margin-bottom: 10px;
+            }
+        }
+        @media only screen and (max-height: 900px){
+            .card p {
+                line-height: 20px;
+            }
+        }
+        .sprayBG {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            transform: translateX(-50%);
+            transform: scale(1.5);
+            height: 100vh;
+            opacity: 15%;
+            overflow: hidden;
+        }
+        .card img {
+            object-fit: cover;
+            width: 100%;
+            max-height: 100%;
+            border-radius: 25px;
+            transition: 0.5s ease all;
+        }
+
+        .card:hover img {
+            opacity: 0.5;
+            filter: blur(.2rem);
+        }
+
+        .card:hover .textContent{
+            opacity: 100%;
+            filter: blur(0);
+        }
+
+        .title {
+            animation: easeInto 1.5s ease forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes easeInto {
+            from {transform: translateY(-200px); filter: blur(0.2rem); opacity: 0;}
+            to {transform: translateY(0);}
+        }
+        #btn {
+            position: absolute;
+            border: 2px solid white;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: transparent;
+            padding: 7px 20px;
+            border-radius: 25px;
+            transition: 0.5s ease all;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 2s;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 100%;}
+        }
+        #btn:hover {
+            color: black;
+            background-color: white;
+        }
+        footer {
+            padding-top: 100px;
+            margin-bottom: 50px;
+        }
+        footer p, footer img {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="sprayBG">
+        <!-- <lottie-player src="/jsn_anims/sprayOverlay.json"  background="transparent" speed="1" autoplay id="overlay" loop></lottie-player> -->
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <a class="logo">
+                <lottie-player src="/jsn_anims/logo.json"  background="transparent" speed="1" autoplay style="width: 50px; height: 50px" id="logoAnim" loop></lottie-player>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="history.html" class="nav-link">History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link" id="selected">Usage</a>
+                </li>
+                <li class="nav-item">
+                    <a href="decorativeandhighart.html" class="nav-link">Decorative and high art</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="push();">
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+            </div>
+        </nav>
+    </header>
+    <div id="hammy"></div>
+
+    <div class="title">
+        <h1 style="text-align: center;">Uses</h1>
+        <br><p>Theories on the use of graffiti by avant-garde artists have a history dating back at least to the Asger Jorn, who in 1962 painting declared in a graffiti like gesture "the avant-garde won't give up".</p>
+        <br><p>Many contemporary analysts and even art critics have begun to see artistic value in some graffiti and to recognize it as a form of public art.<br>According to many art researchers, particularly in the Netherlands and in Los Angeles, that type of public art is, in fact an effective tool of social emancipation or, in the achievement of a political goal.<br><br></p>
+    </div>
+    <div class="container">
+        <div class="card">
+            <img src="/img/use_personal.jpg" alt="">
+            <div class="textContent">
+                <h1>Personal expression</h1>
+                <p>Many graffitists choose to protect their identities and remain anonymous or to hinder prosecution.</p>
+                <p>With the commercialization of graffiti (and hip hop in general), in most cases, even with legally painted "graffiti" art, graffitists tend to choose anonymity. This may be attributed to various reasons or a combination of reasons. Graffiti still remains the one of four hip hop elements that is not considered "performance art" despite the image of the "singing and dancing star" that sells hip hop culture to the mainstream. Being a graphic form of art, it might also be said that many graffitists still fall in the category of the introverted archetypal artist.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="/img/use_territorial.JPG" alt="">
+            <div class="textContent">
+                <h1>Territorial</h1>
+                <p>Territorial graffiti marks urban neighborhoods with tags and logos to differentiate certain groups from others. These images are meant to show outsiders a stern look at whose turf is whose. The subject matter of gang-related graffiti consists of cryptic symbols and initials strictly fashioned with unique calligraphies. Gang members use graffiti to designate membership throughout the gang, to differentiate rivals and associates and, most commonly, to mark borders which are both territorial and ideological.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="/img/use_advertisements.jpg" alt="">
+            <div class="textContent">
+                <h1>As advertising</h1>
+                <p>Graffiti has been used as a means of advertising both legally and illegally. Bronx-based TATS CRU has made a name for themselves doing legal advertising campaigns for companies such as Coca-Cola, McDonald's, Toyota, and MTV. In the UK, Covent Garden's Boxfresh used stencil images of a Zapatista revolutionary in the hopes that cross referencing would promote their store.</p>
+                <p>Smirnoff hired artists to use reverse graffiti (the use of high pressure hoses to clean dirty surfaces to leave a clean image in the surrounding dirt) to increase awareness of their product.</p>
+    
+            </div>
+        </div>
+        <div class="card">
+            <img src="/img/use_political.jpg" alt="">
+            <div class="textContent">
+                <h1>Radical and political</h1>
+                <p>Graffiti often has a reputation as part of a subculture that rebels against authority, although the considerations of the practitioners often diverge and can relate to a wide range of attitudes. It can express a political practice and can form just one tool in an array of resistance techniques. One early example includes the anarcho-punk band Crass, who conducted a campaign of stenciling anti-war, anarchist, feminist, and anti-consumerist messages throughout the London Underground system during the late 1970s and early 1980s.[59] In Amsterdam graffiti was a major part of the punk scene. The city was covered with names such as "De Zoot", "Vendex", and "Dr Rat".</p>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn">MORE</button>
+
+    <footer>
+        <p style="text-align: center;">Devontae Chadwick</p>
+        <img src="img/sign.png" alt="signature" width="80" height="30" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    </footer>
+
+    <script>
+        var ham = false;
+        var navArea = document.getElementById('hammy');
+
+        function push() {
+            ham = !ham;
+            if (ham){
+                navArea.style.height = "300px";
+            }
+            else {
+                navArea.style.height = "0px";
+            }
+        }
+    </script>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
+</body>
+</html>

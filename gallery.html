@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Gallery | Graffiti</title>
+    <style>
+        body, html {
+            background-color: black;
+            overflow: hidden;
+            background-image: url(img/backgroundImg.png);
+
+        }
+        .photo-grid {
+            width: 90%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-auto-rows: 200px;
+        }
+        .card {
+            transition: 0.5s ease-out all;
+            border-radius: 5px;
+        }
+        .card:hover {
+            scale: 1.1;
+        }
+        .card:nth-child(3) {
+            background-size: 350px 450px;
+            background-position-x: -100px;
+        }
+        .card:nth-child(4) {
+            background-size: 700px 700px;
+            background-position-x: -100px;
+        }
+        .card:nth-child(5) {
+            background-size: 250px 200px;
+        }
+        .card:nth-child(6) {
+            background-size: 250px 200px;
+        }
+        .card:nth-child(8) {
+            background-position-x: -50px;
+            background-size: 300px 400px;
+        }
+        .card:nth-child(10) {
+            background-size: 250px 200px;
+        }
+        @media screen and (min-width: 768px) {
+            .card-tall {
+                grid-row: span 2 / auto;
+            }
+            .card-tall2 {
+                grid-row: span 3 / auto;
+            }
+            .card-wide {
+                grid-column: span 2 / auto;
+            }
+            .square {
+                background-position: 50%;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            footer {
+                display: none;
+            }
+            html, body {
+                overflow-y: scroll;
+            }
+            .card:nth-child(3) {
+                background-position-y: 450px;
+                background-position-x: -150px;
+                background-size: 600px 600px;
+            }
+
+            .card:nth-child(4) {
+                background-position-y: 850px;
+                background-position-x: 0;
+                background-size: 450px 450px;
+            }
+
+            .card:nth-child(5) {
+                background-position: 50px;
+                background-size: 450px 450px;
+            }
+
+            .card:nth-child(6) {
+                background-size: 450px 250px;
+            }
+
+            .card:nth-child(8) {
+                background-size: 450px 500px;
+            }
+
+            .card:nth-child(10) {
+                background-position: 50px;
+                background-size: 400px 350px;
+            }
+        }
+        @media screen and (max-width: 1902px){
+            .card:nth-child(11){
+                display: none;
+            }
+        }
+        @media screen and (max-width: 1663px){
+            .card:nth-child(5){
+                display: none;
+            }
+        }
+        .sprayBG {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            transform: translateX(-50%);
+            transform: scale(1.5);
+            height: 100vh;
+            opacity: 15%;
+            overflow: hidden;
+        }
+        header {
+            mix-blend-mode: difference;
+        }
+        .drop {
+            transform: translateY(1000px);
+            animation: dropIn 1s ease forwards;
+            animation-delay: calc(var(--order) * 100ms);
+            opacity: 0;
+        }
+        @keyframes dropIn {
+            from {transform: translateY(1000px);}
+            to {transform: translateY(0); opacity: 100%;}
+        }
+        #bar {
+            mix-blend-mode: difference;
+            height: 2px;
+            width: 0%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: 0.5s ease all;
+            opacity: 0;
+        }
+        .footerTags {
+            padding-top: 15px;
+            display: flex;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+        .title h1 {
+            font-weight: 900;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sprayBG">
+        <lottie-player src="/jsn_anims/sprayOverlay.json"  background="transparent" speed="1" autoplay id="overlay" loop></lottie-player>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <a class="logo">
+                <lottie-player src="/jsn_anims/logo.json"  background="transparent" speed="1" autoplay style="width: 50px; height: 50px" id="logoAnim" loop></lottie-player>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="history.html" class="nav-link">History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="usage.html" class="nav-link">Usage</a>
+                </li>
+                <li class="nav-item">
+                    <a href="decorativeandhighart.html" class="nav-link">Decorative and high art</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link" id="selected">Gallery</a>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="push();">
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+            </div>
+        </nav>
+    </header>
+    <div id="hammy"></div>
+        <div class="photo-grid" id="grideee">
+            <div class="drop card card-tall card-wide" style="--order: 1; background-image: url(/img/flowerThrowerBanksy.webp); background-size: 700px 500px; background-position: 10% 10%;">1</div>
+            <div class="drop card card-wide" style="--order: 2; background-image: url(/img/dukes.jpg); background-size: 450px 200px; background-position: -40px;">2</div>
+            <div class="drop card card-tall" style="--order: 3; background-image: url(/img/statenIsland.jpg);">3</div>
+            <div class="drop card card-tall2 card-wide" style="--order: 4; background-image: url(/img/invis.jpg);">4</div>
+            <div class="drop card square" style="--order: 5; background-image: url(/img/banksy.PNG);">5</div>
+            <div class="drop card square" style="--order: 6; background-image: url(/img/JULYi.jpg); background-position: -10px 20px;">6</div>
+            <div class="drop card square" style="--order: 7; background-image: url(/img/airPollution.jpg); background-size: 200px 200px;">7</div>
+            <div class="drop card card-tall" style="--order: 8; background-image: url(/img/rescueart.jpg);" id="eigthCard">8</div>
+            <div class="drop card card-wide" style="--order: 9; background-image: url(/img/gorillazz.jpg); background-size: 425px 300px; background-position: 50%;">9</div>
+            <div class="drop card" style="--order: 10; background-image: url(/img/gang.webp);">10</div>
+            <div class="drop card card-wide" style="--order: 11; background-image: url(/img/RetnaPiece.jpg); background-size: 425px 200px;">11</div>
+        </div>
+    <div id="blanker" style="height: 75vh;"></div>
+    <footer>
+        <hr id="bar">
+        <div class="footerTags">
+            <div id="blank"></div>
+            <div id="creds">
+                <p>Devontae Chadwick</p>
+                <img src="img/sign.png" alt="signature" width="80" height="30" style="padding-top: 5px;">
+            </div>
+            <div id="blank"></div>
+        </div>
+    </footer>
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        })
+
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }))
+
+        var bar = document.getElementById('bar');
+        var body = document.body.innerHTML;
+        var creds = document.getElementById('creds');
+
+        const timeOut = setTimeout(growBar, 2200);
+        const timeOut2 = setTimeout(growBarOpacity, 2250);
+
+        function growBar() {
+            bar.style.width = "75%";
+            creds.style.flex = "12";
+        }
+
+        function growBarOpacity() {
+            bar.style.opacity = "100%";
+            creds.style.opacity = "100%";
+        }
+
+        var ham = false;
+        var navArea = document.getElementById('hammy');
+
+        function push() {
+            ham = !ham;
+            if (ham){
+                navArea.style.height = "400px";
+            }
+            else {
+                navArea.style.height = "0px";
+            }
+        }
+        var eigth = document.getElementById('eigthCard');
+
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                eigth.classList.remove('card-tall')
+            } else {
+                eigth.classList.add('card-tall');
+            }
+        }
+        function hamGrow(y) {
+            if (x.matches){
+                navArea.style.height = "0px";
+
+            }
+            else {
+            }
+        }
+        var y = window.matchMedia("(max-width: 768px)")
+        var x = window.matchMedia("(max-width: 1902px)")
+        myFunction(x)
+        x.addListener(myFunction)
+
+
+    </script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
+</body>
+</html>

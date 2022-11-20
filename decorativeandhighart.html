@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <title>Decorative and high arts | Graffiti</title>
+    <style>
+        html, header, body {
+            background-color: black;
+            background-image: url(img/backgroundImg.png);
+        }
+        .title h1 {
+            text-align: center;
+            margin-top: 2%;
+        }
+        .title p {
+            margin: 2% 15%;
+        }
+        .content p {
+            margin: 4% 0%;
+        }
+        .content {
+            display: flex;
+            margin: 0 5%;
+            gap: 5%;
+        }
+        .textContent {
+            flex: 1;
+        }
+        .youtubeVideo {
+            flex: 1;
+            overflow: hidden;
+            background-color: white;
+            border-radius: 25px;
+            height: 100%;
+            width: 100%;
+        }
+        .youtubeVideo p {
+            color: black;
+            text-align: center;
+        }
+        footer {
+            padding-top: 100px;
+            margin-bottom: 50px;
+        }
+        footer p {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        footer img {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.25s;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 100%;}
+        }
+        @media only screen and (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .textContent p:hover {
+                scale: 1;
+                background-color: green;
+                padding: 0% 0%;
+                color: black;
+            }
+            #vid {
+                width: auto;
+                height: auto;
+            }
+        }
+        .textContent p {
+            transition: 0.5s ease all;
+            border-radius: 25px;
+        }
+        .textContent p:hover {
+            scale: 1.1;
+            background-color: white;
+            padding: 5% 2%;
+            color: black;
+        }
+        #vid {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a class="logo">
+                <lottie-player src="/jsn_anims/logo.json"  background="transparent" speed="1" autoplay style="width: 50px; height: 50px" id="logoAnim" loop></lottie-player>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="history.html" class="nav-link">History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="usage.html" class="nav-link">Usage</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link" id="selected">Decorative and high art</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="push();">
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+                <span class="hamBar"></span>
+            </div>
+        </nav>
+    </header>
+    <div id="hammy"></div>
+    <div class="title">
+        <h1>Decorative and high art</h1>
+        <p>In the early 1980s, the first art galleries to show graffitists to the public were Fashion Moda in the Bronx, Now Gallery and Fun Gallery, both in the East Village, Manhattan.</p>
+    </div>
+    <div class="content">
+        <div class="textContent">
+            <p>A 2006 exhibition at the Brooklyn Museum displayed graffiti as an art form that began in New York's outer boroughs and reached great heights in the early 1980s with the work of Crash, Lee, Daze, Keith Haring, and Jean-Michel Basquiat. It displayed 22 works by New York graffitists, including Crash, Daze, and Lady Pink. In an article about the exhibition in the magazine Time Out, curator Charlotta Kotik said that she hoped the exhibition would cause viewers to rethink their assumptions about graffiti.<br></p>
+            <p>From the 1970s onwards, Burhan Dogancay photographed urban walls all over the world; these he then archived for use as sources of inspiration for his painterly works. The project today known as "Walls of the World" grew beyond even his own expectations and comprises about 30,000 individual images. It spans a period of 40 years across five continents and 114 countries. In 1982, photographs from this project comprised a one-man exhibition titled "Les murs murmurent, ils crient, ils chantent ..." (The walls whisper, shout and sing ...) at the Centre Georges Pompidou in Paris.<br></p>
+            <p>In Australia, art historians have judged some local graffiti of sufficient creative merit to rank them firmly within the arts. Oxford University Press's art history text Australian Painting 1788–2000 concludes with a long discussion of graffiti's key place within contemporary visual culture, including the work of several Australian practitioners.<br></p>
+            <p>Between March and April 2009, 150 artists exhibited 300 pieces of graffiti at the Grand Palais in Paris.<br></p>
+        </div>
+        <div class="youtubeVideo">
+            <p>
+                Below is a video from abc7NY covering graffiti<br>being displayed in a Brooklyn art exhibit<br><br><br>
+                <iframe id="vid" width="560" height="315" src="https://www.youtube.com/embed/-VMSGxQYCVQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p style="text-align: center;">Devontae Chadwick</p>
+        <img src="img/sign.png" alt="signature" width="80" height="30" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    </footer>
+
+    <script>
+        var ham = false;
+        var navArea = document.getElementById('hammy');
+
+        function push() {
+            ham = !ham;
+            if (ham){
+                navArea.style.height = "400px";
+            }
+            else {
+                navArea.style.height = "0px";
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
+
+</body>
+</html>
